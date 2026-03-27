@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Toast from 'react-native-toast-message';
 import { useDashboard } from '../hooks/useDashboard';
+import { colors, componentStyles, spacing } from '../theme';
+import SimpleCategoryChart from '../components/SimpleCategoryChart';
 
 export default function Dashboard({ navigation }: any) {
   const [usuario, setUsuario] = useState<any>(null);
@@ -23,57 +24,113 @@ export default function Dashboard({ navigation }: any) {
 
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Dashboard</Text>
-      {usuario && <Text>Olá, {usuario.nome}!</Text>}
-      
-      <Text style={{ marginTop: 16, fontSize: 18 }}>Saldo total: {saldoTotal}</Text>
+    <ScrollView
+      style={styles.scroll}
+      contentContainerStyle={styles.content}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} />}
+    >
+      <Text style={componentStyles.title}>Dashboard</Text>
+      <Text style={[componentStyles.subtitle, styles.subtitle]}>
+        {usuario ? `Olá, ${usuario.nome}!` : 'Resumo da sua vida financeira'}
+      </Text>
 
-      <Text style={{ marginTop: 24, fontSize: 18 }}>Gastos por categoria</Text>
-      {loading ? (
-        <Text style={{ marginTop: 8 }}>Carregando...</Text>
-      ) : error ? (
-        <Text style={{ marginTop: 8 }}>{error}</Text>
-      ) : gastosCategoria.length === 0 ? (
-        <Text style={{ marginTop: 8 }}>Sem gastos no período.</Text>
-      ) : (
-        <View style={{ width: '100%', marginTop: 8 }}>
-          {gastosCategoria.map((gasto, idx) => (
-            <Text key={idx}>
-              {gasto.categoria}: {String(gasto.total_gasto)}
-            </Text>
-          ))}
-        </View>
-      )}
+      <View style={componentStyles.card}>
+        <Text style={styles.cardLabel}>Saldo total</Text>
+        <Text style={styles.cardValue}>{loading ? 'Carregando...' : saldoTotal}</Text>
+      </View>
 
-      <Text style={{ marginTop: 24, fontSize: 18 }}>Últimas transações</Text>
-      {loading ? (
-        <Text style={{ marginTop: 8 }}>Carregando...</Text>
-      ) : error ? (
-        <Text style={{ marginTop: 8 }}>{error}</Text>
-      ) : ultimasTransacoes.length === 0 ? (
-        <Text style={{ marginTop: 8 }}>Sem transações.</Text>
-      ) : (
-        <View style={{ width: '100%', marginTop: 8 }}>
-          {ultimasTransacoes.map((t) => (
-            <Text key={t.id} style={{ marginBottom: 8 }}>
-              {t.data_transacao} | {t.descricao ?? t.tipo_transacao ?? 'Transação'}{' '}
-              {t.produto_nome ? `(${t.produto_nome})` : ''} |{' '}
-              {t.direcao === 'saida' ? '-' : '+'}
+      <View style={[componentStyles.card, styles.sectionCard]}>
+        <Text style={styles.sectionTitle}>Gastos por categoria (gráfico básico)</Text>
+        {loading ? (
+          <Text style={styles.mutedText}>Carregando...</Text>
+        ) : error ? (
+          <Text style={styles.errorText}>{error}</Text>
+        ) : gastosCategoria.length === 0 ? (
+          <Text style={styles.mutedText}>Sem gastos no período.</Text>
+        ) : (
+          <SimpleCategoryChart data={gastosCategoria} maxItems={5} />
+        )}
+      </View>
+
+      <View style={[componentStyles.card, styles.sectionCard]}>
+        <Text style={styles.sectionTitle}>Últimas transações</Text>
+        {loading ? (
+          <Text style={styles.mutedText}>Carregando...</Text>
+        ) : error ? (
+          <Text style={styles.errorText}>{error}</Text>
+        ) : ultimasTransacoes.length === 0 ? (
+          <Text style={styles.mutedText}>Sem transações.</Text>
+        ) : (
+          ultimasTransacoes.slice(0, 4).map((t) => (
+            <Text key={t.id} style={styles.listItem}>
+              {t.descricao ?? t.tipo_transacao ?? 'Transação'} | {t.direcao === 'saida' ? '-' : '+'}
               {String(t.valor)}
-              {t.categoria_nome ? ` | ${t.categoria_nome}` : ''}
             </Text>
-          ))}
-        </View>
-      )}
+          ))
+        )}
+      </View>
 
-      <Button title="Atualizar dashboard" onPress={refresh} />
-      <Button title="Sair" onPress={handleLogout} color="red" />
-    </View>
+      <TouchableOpacity style={componentStyles.buttonPrimary} onPress={() => navigation.navigate('Transacoes')}>
+        <Text style={componentStyles.buttonPrimaryText}>Ver todas as transações</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={componentStyles.buttonPrimary} onPress={() => navigation.navigate('GastosCategoria')}>
+        <Text style={componentStyles.buttonPrimaryText}>Ver gastos por categoria</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={componentStyles.buttonPrimary} onPress={refresh}>
+        <Text style={componentStyles.buttonPrimaryText}>Atualizar dashboard</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={componentStyles.buttonOff} onPress={handleLogout}>
+        <Text style={[componentStyles.buttonOffText, styles.logoutText]}>Sair</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
-  title: { fontSize: 24, marginBottom: 20 },
+  scroll: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  content: {
+    padding: spacing.lg,
+    paddingBottom: spacing.xl,
+  },
+  subtitle: {
+    marginBottom: spacing.lg,
+  },
+  cardLabel: {
+    color: colors.textSecondary,
+    fontSize: 14,
+    marginBottom: 6,
+  },
+  cardValue: {
+    color: colors.textPrimaryHeader,
+    fontSize: 28,
+    fontWeight: '700',
+  },
+  sectionCard: {
+    marginTop: spacing.md,
+  },
+  sectionTitle: {
+    color: colors.textPrimary,
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: spacing.sm,
+  },
+  listItem: {
+    color: colors.textPrimary,
+    marginBottom: 6,
+  },
+  mutedText: {
+    color: colors.textSecondary,
+  },
+  errorText: {
+    color: colors.danger,
+  },
+  logoutText: {
+    color: colors.danger,
+  },
 });

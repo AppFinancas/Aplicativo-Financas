@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
@@ -12,6 +11,7 @@ import PhoneInput from 'react-native-international-phone-number';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
 import api from '../services/api';
+import { colors, componentStyles, spacing } from '../theme';
 
 export default function Cadastro({ navigation }: any) {
   const [nome, setNome] = useState('');
@@ -74,20 +74,23 @@ export default function Cadastro({ navigation }: any) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Criar conta</Text>
+    <View style={componentStyles.screenContainer}>
+      <Text style={componentStyles.title}>Crie sua conta</Text>
+      <Text style={[componentStyles.subtitle, styles.subtitleSpacing]}>
+        Comece a organizar suas finanças em poucos passos
+      </Text>
 
-      <Text style={styles.label}>Nome Completo</Text>
+      <Text style={componentStyles.inputText}>Nome Completo</Text>
       <TextInput
-        style={styles.input}
+        style={[componentStyles.input,{ marginBottom: spacing.sm } ]}
         value={nome}
         onChangeText={setNome}
         placeholder="Seu nome"
       />
 
-      <Text style={styles.label}>Email</Text>
+      <Text style={componentStyles.inputText}>Email</Text>
       <TextInput
-        style={styles.input}
+        style={[componentStyles.input,{ marginBottom: spacing.sm } ]}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -95,7 +98,7 @@ export default function Cadastro({ navigation }: any) {
         placeholder="seu@email.com"
       />
 
-      <Text style={styles.label}>Telefone</Text>
+      <Text style={componentStyles.inputText}>Telefone</Text>
       <PhoneInput
         value={telefone}
         onChangePhoneNumber={setTelefone}
@@ -105,41 +108,41 @@ export default function Cadastro({ navigation }: any) {
         theme="light"
         phoneInputStyles={{
           container: {
-            backgroundColor: '#fff',
+            backgroundColor: colors.surface,
             borderWidth: 1,
-            borderColor: '#ccc',
-            borderRadius: 8,
-            marginBottom: 15,
+            borderColor: colors.border,
+            borderRadius: 10,
+            marginBottom: spacing.md,
           },
           flagContainer: {
-            backgroundColor: '#fff',
-            borderTopLeftRadius: 8,
-            borderBottomLeftRadius: 8,
+            backgroundColor: colors.surface,
+            borderTopLeftRadius: 10,
+            borderBottomLeftRadius: 10,
           },
           flag: {
             fontSize: 24,
-            color: '#000',
+            color: colors.textPrimary,
           },
           input: {
-            color: '#000',
+            color: colors.textPrimary,
             fontSize: 16,
             paddingVertical: 12,
           },
         }}
       />
 
-      <Text style={styles.label}>Senha</Text>
+      <Text style={componentStyles.inputText}>Senha</Text>
       <TextInput
-        style={styles.input}
+        style={[componentStyles.input,{ marginBottom: spacing.sm } ]}
         value={senha}
         onChangeText={setSenha}
         secureTextEntry
         placeholder="********"
       />
 
-      <Text style={styles.label}>Confirmar Senha</Text>
+      <Text style={componentStyles.inputText}>Confirmar Senha</Text>
       <TextInput
-        style={styles.input}
+        style={[componentStyles.input,{ marginBottom: spacing.sm } ]}
         value={senhaConfirma}
         onChangeText={setSenhaConfirma}
         secureTextEntry
@@ -147,51 +150,27 @@ export default function Cadastro({ navigation }: any) {
       />
 
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <View style={[componentStyles.buttonPrimary, styles.buttonSpacing]}>
+          <ActivityIndicator size="small" color={colors.textOnPrimary} />
+        </View>
       ) : (
-        <Button title="Cadastrar" onPress={handleCadastro} />
+        <TouchableOpacity onPress={handleCadastro} style={[componentStyles.buttonPrimary, styles.buttonSpacing]}>
+          <Text style={componentStyles.buttonPrimaryText}>Cadastrar</Text>
+        </TouchableOpacity>
       )}
 
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.loginLink}>
-        <Text style={styles.loginText}>Já tem conta? Faça login</Text>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={componentStyles.buttonOff}>
+        <Text style={componentStyles.buttonOffText}>Já tem conta? Faça login</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#f5f5f5',
+  subtitleSpacing: {
+    marginBottom: spacing.lg,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 30,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-    fontWeight: '500',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 15,
-    backgroundColor: '#fff',
-    fontSize: 16,
-  },
-  loginLink: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  loginText: {
-    color: '#0066cc',
-    fontSize: 16,
+  buttonSpacing: {
+    marginTop: spacing.sm,
   },
 });

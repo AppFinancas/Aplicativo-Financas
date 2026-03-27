@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/api';
+import { colors, componentStyles, spacing, typography } from '../theme';
 
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState('');
@@ -45,13 +46,13 @@ export default function Login({ navigation }: any) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>App Finanças</Text>
-      <Text style={styles.subtitle}>Faça login para continuar</Text>
+    <View style={componentStyles.screenContainer}>
+      <Text style={[componentStyles.title, {justifyContent: 'flex-start'},{ marginBottom: 60 }]}>Olá, faça login</Text>
+      <Text style={[componentStyles.subtitle, { marginBottom: 6 }]}>Faça login para continuar com suas finanças</Text>
 
-      <Text style={styles.label}>Email</Text>
+      <Text style={componentStyles.inputText}>Email</Text>
       <TextInput
-        style={styles.input}
+        style={[componentStyles.input, { marginBottom: spacing.sm }]}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -59,66 +60,21 @@ export default function Login({ navigation }: any) {
         placeholder="seu@email.com"
       />
 
-      <Text style={styles.label}>Senha</Text>
+      <Text style={componentStyles.inputText}>Senha</Text>
       <TextInput
-        style={styles.input}
+        style={[componentStyles.input,{ marginBottom: spacing.sm }]}
         value={senha}
         onChangeText={setSenha}
         secureTextEntry
         placeholder="********"
       />
-
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <Button title="Entrar" onPress={handleLogin} />
-      )}
-
-      <TouchableOpacity onPress={handleCadastro} style={styles.registerLink}>
-        <Text style={styles.registerText}>Não tem conta? Cadastre-se</Text>
+      <TouchableOpacity onPress={handleLogin} style={componentStyles.buttonPrimary}>
+        <Text style={[componentStyles.buttonPrimaryText]}>Entrar</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleCadastro} style={componentStyles.buttonOff}>
+        <Text style={componentStyles.buttonOffText}>Não tem conta? Cadastre-se</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 30,
-    color: '#666',
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-    fontWeight: '500',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 15,
-    backgroundColor: '#fff',
-  },
-  registerLink: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  registerText: {
-    color: '#0066cc',
-    fontSize: 16,
-  },
-});
+;
