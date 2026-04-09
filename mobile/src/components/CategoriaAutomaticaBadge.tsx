@@ -9,7 +9,8 @@ type Props = {
 
 const regrasLocais = [
   { categoria: 'Alimentação', palavras: ['ifood', 'mercado', 'restaurante', 'padaria'] },
-  { categoria: 'Transporte', palavras: ['uber', '99', 'combustivel', 'posto'] },
+  { categoria: 'Transporte', palavras: ['99', 'combustivel', 'posto'] },
+  {categoria: 'teste', palavras: ['uber'] },
   { categoria: 'Moradia', palavras: ['aluguel', 'condominio', 'energia', 'luz', 'agua', 'internet'] },
 ];
 

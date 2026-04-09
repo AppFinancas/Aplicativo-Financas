@@ -1,166 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>App Finanças Pessoais - Documentação</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        h1, h2, h3 {
-            color: #005a9c;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-        h1 {
-            font-size: 2em;
-        }
-        h2 {
-            font-size: 1.5em;
-            margin-top: 30px;
-        }
-        h3 {
-            font-size: 1.2em;
-            margin-top: 20px;
-            border-bottom: none;
-        }
-        ul, ol {
-            margin-left: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: #fff;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #005a9c;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .version-block {
-            background-color: #e7f0ff;
-            padding: 15px;
-            border-left: 5px solid #005a9c;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .wireframe {
-            background-color: #f0f0f0;
-            padding: 10px;
-            font-family: monospace;
-            white-space: pre-wrap;
-            border: 1px dashed #888;
-            margin: 10px 0;
-        }
-        .footer {
-            margin-top: 40px;
-            font-size: 0.9em;
-            text-align: center;
-            color: #777;
-            border-top: 1px solid #ccc;
-            padding-top: 10px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #005a9c;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.5em;
+        margin-top: 30px;
+      }
+      h3 {
+        font-size: 1.2em;
+        margin-top: 20px;
+        border-bottom: none;
+      }
+      ul,
+      ol {
+        margin-left: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: #fff;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #005a9c;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .version-block {
+        background-color: #e7f0ff;
+        padding: 15px;
+        border-left: 5px solid #005a9c;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+      }
+      .wireframe {
+        background-color: #f0f0f0;
+        padding: 10px;
+        font-family: monospace;
+        white-space: pre-wrap;
+        border: 1px dashed #888;
+        margin: 10px 0;
+      }
+      .footer {
+        margin-top: 40px;
+        font-size: 0.9em;
+        text-align: center;
+        color: #777;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>📱 App Finanças Pessoais – Open Finance</h1>
-    <p><strong>Documentação completa:</strong> Requisitos técnicos, wireframes e squads.</p>
+    <p>
+      <strong>Documentação completa:</strong> Requisitos técnicos, wireframes e
+      squads.
+    </p>
 
     <!-- 1. REQUISITOS TÉCNICOS -->
     <h2>📁 1. Documento de Requisitos Técnicos</h2>
-    
+
     <h3>🧱 Arquitetura Geral (Todas as Versões)</h3>
     <table>
-        <tr><th>Camada</th><th>Tecnologia sugerida</th><th>Observação</th></tr>
-        <tr><td>Frontend (App)</td><td>React Native / Flutter</td><td>Código único iOS + Android</td></tr>
-        <tr><td>Backend</td><td>Node.js / Python (Django)</td><td>API REST ou GraphQL</td></tr>
-        <tr><td>Banco de dados</td><td>PostgreSQL / Firebase</td><td>Relacional + NoSQL (se necessário)</td></tr>
-        <tr><td>Autenticação</td><td>JWT + OAuth2</td><td>Login social via Firebase/Auth0</td></tr>
-        <tr><td>Open Finance</td><td>API oficial (BCB)</td><td>Conector via parceiro certificado</td></tr>
-        <tr><td>Notificações</td><td>Firebase Cloud Messaging</td><td>Push notifications</td></tr>
-        <tr><td>Cache/Offline</td><td>AsyncStorage / SQLite</td><td>V1.0</td></tr>
+      <tr>
+        <th>Camada</th>
+        <th>Tecnologia sugerida</th>
+        <th>Observação</th>
+      </tr>
+      <tr>
+        <td>Frontend (App)</td>
+        <td>React Native</td>
+        <td>Código único iOS + Android</td>
+      </tr>
+      <tr>
+        <td>Backend</td>
+        <td>Node.js</td>
+        <td>API REST</td>
+      </tr>
+      <tr>
+        <td>Banco de dados</td>
+        <td>PostgreSQL / Firebase</td>
+        <td>Relacional</td>
+      </tr>
+      <tr>
+        <td>Autenticação</td>
+        <td>JWT + OAuth2</td>
+        <td>Login social via Firebase/Auth0</td>
+      </tr>
+      <tr>
+        <td>Open Finance</td>
+        <td>API oficial (BCB)</td>
+        <td>Conector via parceiro certificado</td>
+      </tr>
+      <tr>
+        <td>Notificações</td>
+        <td>Firebase Cloud Messaging</td>
+        <td>Push notifications</td>
+      </tr>
+      <tr>
+        <td>Cache/Offline</td>
+        <td>AsyncStorage / SQLite</td>
+        <td>V1.0</td>
+      </tr>
     </table>
 
     <div class="version-block">
-        <h3>🔵 Versão 0.1 – MVP (Requisitos técnicos)</h3>
-        <p><strong>Escopo:</strong> Mínimo viável + Open Finance</p>
-        <h4>📲 Frontend</h4>
-        <ul>
-            <li>[ ] Tela de login/cadastro com e-mail + senha</li>
-            <li>[ ] Tela de onboarding simples (explicar Open Finance)</li>
-            <li>[ ] Webview ou SDK para conexão Open Finance</li>
-            <li>[ ] Tela de dashboard com: Saldo total consolidado, Últimas transações, Gráfico de gastos por categoria (básico)</li>
-            <li>[ ] Tela de listagem de transações</li>
-            <li>[ ] Componente de categorização automática</li>
-        </ul>
-        <h4>🖥️ Backend</h4>
-        <ul>
-            <li>[ ] API de autenticação (JWT)</li>
-            <li>[ ] CRUD de usuários</li>
-            <li>[ ] Integração com Open Finance (via parceiro)</li>
-            <li>[ ] Webhooks para receber dados bancários</li>
-            <li>[ ] Serviço de categorização automática (regras fixas)</li>
-            <li>[ ] Banco de dados: User, Account, Transaction, Category</li>
-        </ul>
-        <h4>🔐 Segurança</h4>
-        <ul>
-            <li>[ ] Criptografia em repouso (dados sensíveis)</li>
-            <li>[ ] Token rotativo</li>
-            <li>[ ] Política de senha forte</li>
-        </ul>
+      <h3>🔵 Versão 0.1 – MVP (Requisitos técnicos)</h3>
+      <p><strong>Escopo:</strong> Mínimo viável + Open Finance</p>
+      <h4>📲 Frontend</h4>
+      <ul>
+        <li>[ ] Tela de login/cadastro com e-mail + senha</li>
+        <li>[ ] Tela de onboarding simples (explicar Open Finance)</li>
+        <li>
+          [ ] Tela de dashboard com: Saldo total consolidado, Últimas
+          transações, Gráfico de gastos por categoria (básico)
+        </li>
+        <li>[ ] Tela de listagem de transações</li>
+        <li>[ ] Componente de categorização automática</li>
+      </ul>
+      <h4>🖥️ Backend</h4>
+      <ul>
+        <li>[ ] API de autenticação (JWT)</li>
+        <li>[ ] CRUD de usuários</li>
+        <li>[ ] Integração com Open Finance (via parceiro)</li>
+        <li>[ ] Webhooks para receber dados bancários</li>
+        <li>[ ] Serviço de categorização automática (regras fixas)</li>
+        <li>[ ] Banco de dados: User, Account, Transaction, Category</li>
+      </ul>
+      <h4>🔐 Segurança</h4>
+      <ul>
+        <li>[ ] Criptografia em repouso (dados sensíveis)</li>
+        <li>[ ] Token rotativo</li>
+        <li>[ ] Política de senha forte</li>
+      </ul>
     </div>
 
     <div class="version-block">
-        <h3>🟡 Versão 0.5 – Evolução (Requisitos técnicos)</h3>
-        <p><strong>Escopo:</strong> Retenção e usabilidade</p>
-        <ul>
-            <li>[ ] Login Google/Apple (OAuth2)</li>
-            <li>[ ] Tela de perfil editável</li>
-            <li>[ ] Serviço de notificações push (FCM)</li>
-            <li>[ ] Módulo de metas financeiras: Criar meta (nome, valor, prazo), Progresso visual, Sugestão mensal para atingir</li>
-            <li>[ ] Conteúdo educacional estático (sugestão de investimentos)</li>
-            <li>[ ] Melhoria na UI com Design System leve</li>
-            <li>[ ] Analytics de eventos (Firebase)</li>
-        </ul>
+      <h3>🟡 Versão 0.5 – Evolução (Requisitos técnicos)</h3>
+      <p><strong>Escopo:</strong> Retenção e usabilidade</p>
+      <ul>
+        <li>[ ] Login Google/Apple (OAuth2)</li>
+        <li>[ ] Tela de perfil editável</li>
+        <li>[ ] Webview ou SDK para conexão Open Finance</li>
+        <li>[ ] Serviço de notificações push (FCM)</li>
+        <li>
+          [ ] Módulo de metas financeiras: Criar meta (nome, valor, prazo),
+          Progresso visual, Sugestão mensal para atingir
+        </li>
+        <li>[ ] Melhoria na UI com Design System leve</li>
+        <li>[ ] Analytics de eventos (Firebase)</li>
+      </ul>
     </div>
 
     <div class="version-block">
-        <h3>🟠 Versão 0.7 – Controle Avançado (Requisitos técnicos)</h3>
-        <p><strong>Escopo:</strong> Múltiplos perfis + cartões de crédito</p>
-        <ul>
-            <li>[ ] Modelo de múltiplos perfis (Profile/Workspace) – Relação 1:N (usuário → perfis), Troca de contexto no app</li>
-            <li>[ ] Integração completa com dados de cartão de crédito via Open Finance: Limite, Fatura aberta, Faturas anteriores, Gastos por categoria no crédito</li>
-            <li>[ ] Extrato consolidado (conta + crédito)</li>
-            <li>[ ] Simulador "guarde mais": Quanto guardar por mês para meta X, Projeção de rendimento (cenários)</li>
-            <li>[ ] Indicadores financeiros (ex: comprometimento de renda)</li>
-        </ul>
+      <h3>🟠 Versão 0.7 – Controle Avançado (Requisitos técnicos)</h3>
+      <p><strong>Escopo:</strong> Múltiplos perfis + cartões de crédito</p>
+      <ul>
+        <li>[ ] Conteúdo educacional estático (sugestão de investimentos)</li>
+        <li>
+          [ ] Modelo de múltiplos perfis (Profile/Workspace) – Relação 1:N
+          (usuário → perfis), Troca de contexto no app
+        </li>
+        <li>
+          [ ] Integração completa com dados de cartão de crédito via Open
+          Finance: Limite, Fatura aberta, Faturas anteriores, Gastos por
+          categoria no crédito
+        </li>
+        <li>[ ] Extrato consolidado (conta + crédito)</li>
+        <li>
+          [ ] Simulador "guarde mais": Quanto guardar por mês para meta X,
+          Projeção de rendimento (cenários)
+        </li>
+        <li>[ ] Indicadores financeiros (ex: comprometimento de renda)</li>
+      </ul>
     </div>
 
     <div class="version-block">
-        <h3>🟢 Versão 1.0 – Maduro (Requisitos técnicos)</h3>
-        <p><strong>Escopo:</strong> Execução financeira + IA</p>
-        <ul>
-            <li>[ ] Integração com APIs de corretoras/investimentos: Ordem de compra/resgate, Extrato de investimentos</li>
-            <li>[ ] Motor de recomendação baseado em regras + IA – Machine learning simples (TensorFlow Lite ou API)</li>
-            <li>[ ] Modo offline: Cache de transações, Sincronização ao voltar online</li>
-            <li>[ ] Exportador de relatórios (PDF, CSV)</li>
-            <li>[ ] Acessibilidade: TalkBack + VoiceOver</li>
-            <li>[ ] Internacionalização (PT-BR + EN)</li>
-            <li>[ ] Testes A/B configurável</li>
-        </ul>
+      <h3>🟢 Versão 1.0 – Maduro (Requisitos técnicos)</h3>
+      <p><strong>Escopo:</strong> Execução financeira + IA</p>
+      <ul>
+        <li>
+          [ ] Integração com APIs de corretoras/investimentos: Ordem de
+          compra/resgate, Extrato de investimentos (não para fazer investimento
+          dentro do app mas para receber os dados dos investimentos do usuario)
+        </li>
+        <li>
+          [ ] Motor de recomendação baseado em regras + IA – Machine learning
+          simples (TensorFlow Lite ou API)
+        </li>
+        <li>
+          [ ] Modo offline: Cache de transações, Sincronização ao voltar online
+        </li>
+        <li>[ ] Exportador de relatórios (PDF, CSV)</li>
+        <li>[ ] Acessibilidade: TalkBack + VoiceOver</li>
+        <li>[ ] Internacionalização (PT-BR + EN)</li>
+        <li>[ ] Testes A/B configurável</li>
+      </ul>
     </div>
 
     <!-- 2. WIREFRAME BÁSICO DESCRITIVO -->
@@ -169,118 +233,73 @@
 
     <h3>🔵 Versão 0.1 – MVP (4 telas principais)</h3>
     <div class="wireframe">
-        <strong>Tela 1 – Login/Cadastro</strong>
-        [Logo]
-        [E-mail]
-        [Senha]
-        [Entrar]
-        [Criar conta]
+      <strong>Tela 1 – Login/Cadastro</strong>
+      [Logo] [E-mail] [Senha] [Entrar] [Criar conta]
     </div>
     <div class="wireframe">
-        <strong>Tela 2 – Conexão Open Finance</strong>
-        [Ilustração]
-        "Conecte seu banco"
-        [Botão: Conectar banco]
-        [Lista de bancos parceiros]
+      <strong>Tela 2 – Conexão Open Finance</strong>
+      [Ilustração] "Conecte seu banco" [Botão: Conectar banco] [Lista de bancos
+      parceiros]
     </div>
     <div class="wireframe">
-        <strong>Tela 3 – Dashboard</strong>
-        Saldo total: R$ X.XXX
-        ┌─────────────────────┐
-        │ Gráfico de pizza    │
-        │ (Categorias)        │
-        └─────────────────────┘
-        Últimas transações:
-        - Padaria R$ 15,00
-        - Uber  R$ 23,00
-        [Ver todas]
+      <strong>Tela 3 – Dashboard</strong>
+      Saldo total: R$ X.XXX ┌─────────────────────┐ │ Gráfico de pizza │ │
+      (Categorias) │ └─────────────────────┘ Últimas transações: - Padaria R$
+      15,00 - Uber R$ 23,00 [Ver todas]
     </div>
     <div class="wireframe">
-        <strong>Tela 4 – Lista de transações</strong>
-        Filtro: Mês atual
-        Busca...
-        [ícone] Supermercado - R$ 350
-        [ícone] Academia     - R$ 99
-        [ícone] Streaming    - R$ 34
+      <strong>Tela 4 – Lista de transações</strong>
+      Filtro: Mês atual Busca... [ícone] Supermercado - R$ 350 [ícone] Academia
+      - R$ 99 [ícone] Streaming - R$ 34
     </div>
 
     <h3>🟡 Versão 0.5 – Evolução (+3 telas)</h3>
     <div class="wireframe">
-        <strong>Tela 5 – Perfil</strong>
-        Foto | Nome
-        E-mail
-        Banco conectado: [Itaú]
-        [Editar dados]
-        [Configurar notificações]
+      <strong>Tela 5 – Perfil</strong>
+      Foto | Nome E-mail Banco conectado: [Itaú] [Editar dados] [Configurar
+      notificações]
     </div>
     <div class="wireframe">
-        <strong>Tela 6 – Metas</strong>
-        Minhas metas
-        [+] Nova meta
-
-        📦 Reserva emergência
-        R$ 3.000 / R$ 10.000
-        🔵🔵🔵⚪⚪ 30%
-        Guardar R$ 300/mês
+      <strong>Tela 6 – Metas</strong>
+      Minhas metas [+] Nova meta 📦 Reserva emergência R$ 3.000 / R$ 10.000
+      🔵🔵🔵⚪⚪ 30% Guardar R$ 300/mês
     </div>
     <div class="wireframe">
-        <strong>Tela 7 – Sugestão de investimentos</strong>
-        Com base nos seus gastos:
-        💡 Você pode investir R$ 500/mês
-        CDB 110% CDI → R$ 6.300 em 12 meses
-        [Simular]
+      <strong>Tela 7 – Sugestão de investimentos</strong>
+      Com base nos seus gastos: 💡 Você pode investir R$ 500/mês CDB 110% CDI →
+      R$ 6.300 em 12 meses [Simular]
     </div>
 
     <h3>🟠 Versão 0.7 – Controle Avançado (+3 telas)</h3>
     <div class="wireframe">
-        <strong>Tela 8 – Seleção de perfil</strong>
-        🧑 Você (pessoal)
-        🏢 Minha empresa
-        👨‍👩‍👦 Família
-        [+ Criar novo perfil]
+      <strong>Tela 8 – Seleção de perfil</strong>
+      🧑 Você (pessoal) 🏢 Minha empresa 👨‍👩‍👦 Família [+ Criar novo perfil]
     </div>
     <div class="wireframe">
-        <strong>Tela 9 – Visão de cartões</strong>
-        Cartões de crédito
-        ┌─────────────────┐
-        │ Nubank          │
-        │ Limite: R$ 5.000│
-        │ Fatura: R$ 1.230│
-        │ [Ver gastos]    │
-        └─────────────────┘
+      <strong>Tela 9 – Visão de cartões</strong>
+      Cartões de crédito ┌─────────────────┐ │ Nubank │ │ Limite: R$ 5.000│ │
+      Fatura: R$ 1.230│ │ [Ver gastos] │ └─────────────────┘
     </div>
     <div class="wireframe">
-        <strong>Tela 10 – Simulador guardar + investir</strong>
-        Meta: R$ 20.000 em 24 meses
-        Depósito mensal: R$ 700
-        Rendimento: R$ 1.800
-        ✅ Total acumulado: R$ 21.800
+      <strong>Tela 10 – Simulador guardar + investir</strong>
+      Meta: R$ 20.000 em 24 meses Depósito mensal: R$ 700 Rendimento: R$ 1.800
+      ✅ Total acumulado: R$ 21.800
     </div>
 
     <h3>🟢 Versão 1.0 – Maduro (+3 telas)</h3>
     <div class="wireframe">
-        <strong>Tela 11 – Investir agora</strong>
-        Saldo disponível: R$ 2.500
-        📈 CDB 110% CDI
-           Vencimento: 2027
-           [Investir]
-        📊 Tesouro Selic
-           Liquidez diária
-           [Investir]
+      <strong>Tela 11 – Investir agora</strong>
+      Saldo disponível: R$ 2.500 📈 CDB 110% CDI Vencimento: 2027 [Investir] 📊
+      Tesouro Selic Liquidez diária [Investir]
     </div>
     <div class="wireframe">
-        <strong>Tela 12 – Relatórios</strong>
-        Gerar relatório
-        [Período]
-        [Exportar PDF]
-        [Exportar Excel]
+      <strong>Tela 12 – Relatórios</strong>
+      Gerar relatório [Período] [Exportar PDF] [Exportar Excel]
     </div>
     <div class="wireframe">
-        <strong>Tela 13 – IA Recomendações</strong>
-        🤖 Com base nos seus gastos:
-        Você economizou 15% este mês
-        Que tal aumentar aporte?
-        Sugestão: R$ 50 a mais no CDB
+      <strong>Tela 13 – IA Recomendações</strong>
+      🤖 Com base nos seus gastos: Você economizou 15% este mês Que tal aumentar
+      aporte? Sugestão: R$ 50 a mais no CDB
     </div>
 
     <!-- 3. SEPARAÇÃO POR SQUADS/TIMES -->
@@ -289,68 +308,182 @@
 
     <h3>🧩 Estrutura de Squads (Fixa)</h3>
     <table>
-        <tr><th>Squad</th><th>Responsabilidade principal</th></tr>
-        <tr><td><strong>Squad Mobile</strong></td><td>App (React Native/Flutter) + UI/UX</td></tr>
-        <tr><td><strong>Squad Backend</strong></td><td>APIs, banco de dados, regras de negócio</td></tr>
-        <tr><td><strong>Squad Open Fin.</strong></td><td>Conectores, webhooks, categorização</td></tr>
-        <tr><td><strong>Squad Dados/IA</strong></td><td>Analytics, machine learning, recomendação</td></tr>
-        <tr><td><strong>Squad QA</strong></td><td>Testes, qualidade, homologação</td></tr>
-        <tr><td><strong>Squad DevOps</strong></td><td>Infraestrutura, CI/CD, monitoramento</td></tr>
+      <tr>
+        <th>Squad</th>
+        <th>Responsabilidade principal</th>
+      </tr>
+      <tr>
+        <td><strong>Squad Mobile</strong></td>
+        <td>App (React Native/Flutter) + UI/UX</td>
+      </tr>
+      <tr>
+        <td><strong>Squad Backend</strong></td>
+        <td>APIs, banco de dados, regras de negócio</td>
+      </tr>
+      <tr>
+        <td><strong>Squad Open Fin.</strong></td>
+        <td>Conectores, webhooks, categorização</td>
+      </tr>
+      <tr>
+        <td><strong>Squad Dados/IA</strong></td>
+        <td>Analytics, machine learning, recomendação</td>
+      </tr>
+      <tr>
+        <td><strong>Squad QA</strong></td>
+        <td>Testes, qualidade, homologação</td>
+      </tr>
+      <tr>
+        <td><strong>Squad DevOps</strong></td>
+        <td>Infraestrutura, CI/CD, monitoramento</td>
+      </tr>
     </table>
 
     <h3>🔵 Versão 0.1 – MVP</h3>
     <table>
-        <tr><th>Squad</th><th>Tarefas principais</th></tr>
-        <tr><td>Mobile</td><td>Telas 1 a 4, conexão Open Finance via SDK, categorização visual</td></tr>
-        <tr><td>Backend</td><td>API de auth, CRUD usuários, webhooks OF, regras de categoria</td></tr>
-        <tr><td>Open Fin.</td><td>Integração com parceiro certificado, mapeamento de dados</td></tr>
-        <tr><td>QA</td><td>Testes de fluxo: login → conectar → ver saldo</td></tr>
-        <tr><td>DevOps</td><td>Setup inicial: servidor, banco, domínio</td></tr>
+      <tr>
+        <th>Squad</th>
+        <th>Tarefas principais</th>
+      </tr>
+      <tr>
+        <td>Mobile</td>
+        <td>Telas 1 a 4, conexão Open Finance via SDK, categorização visual</td>
+      </tr>
+      <tr>
+        <td>Backend</td>
+        <td>API de auth, CRUD usuários, webhooks OF, regras de categoria</td>
+      </tr>
+      <tr>
+        <td>Open Fin.</td>
+        <td>Integração com parceiro certificado, mapeamento de dados</td>
+      </tr>
+      <tr>
+        <td>QA</td>
+        <td>Testes de fluxo: login → conectar → ver saldo</td>
+      </tr>
+      <tr>
+        <td>DevOps</td>
+        <td>Setup inicial: servidor, banco, domínio</td>
+      </tr>
     </table>
 
     <h3>🟡 Versão 0.5 – Evolução</h3>
     <table>
-        <tr><th>Squad</th><th>Tarefas principais</th></tr>
-        <tr><td>Mobile</td><td>Telas 5, 6, 7, login social, notificações</td></tr>
-        <tr><td>Backend</td><td>API de metas, conteúdos educativos, push tokens</td></tr>
-        <tr><td>Open Fin.</td><td>(manutenção)</td></tr>
-        <tr><td>Dados/IA</td><td>(primeiros eventos de analytics)</td></tr>
-        <tr><td>QA</td><td>Testes de notificação, criação de metas</td></tr>
-        <tr><td>DevOps</td><td>Escalabilidade inicial, monitoramento</td></tr>
+      <tr>
+        <th>Squad</th>
+        <th>Tarefas principais</th>
+      </tr>
+      <tr>
+        <td>Mobile</td>
+        <td>Telas 5, 6, 7, login social, notificações</td>
+      </tr>
+      <tr>
+        <td>Backend</td>
+        <td>API de metas, conteúdos educativos, push tokens</td>
+      </tr>
+      <tr>
+        <td>Open Fin.</td>
+        <td>(manutenção)</td>
+      </tr>
+      <tr>
+        <td>Dados/IA</td>
+        <td>(primeiros eventos de analytics)</td>
+      </tr>
+      <tr>
+        <td>QA</td>
+        <td>Testes de notificação, criação de metas</td>
+      </tr>
+      <tr>
+        <td>DevOps</td>
+        <td>Escalabilidade inicial, monitoramento</td>
+      </tr>
     </table>
 
     <h3>🟠 Versão 0.7 – Controle Avançado</h3>
     <table>
-        <tr><th>Squad</th><th>Tarefas principais</th></tr>
-        <tr><td>Mobile</td><td>Telas 8, 9, 10, múltiplos perfis, crédito</td></tr>
-        <tr><td>Backend</td><td>Modelo de perfis, dados de cartão, simulador</td></tr>
-        <tr><td>Open Fin.</td><td>Expansão: cartão de crédito via OF</td></tr>
-        <tr><td>Dados/IA</td><td>Indicadores financeiros, comprometimento</td></tr>
-        <tr><td>QA</td><td>Testes de perfil, conciliação crédito</td></tr>
-        <tr><td>DevOps</td><td>Cache, performance</td></tr>
+      <tr>
+        <th>Squad</th>
+        <th>Tarefas principais</th>
+      </tr>
+      <tr>
+        <td>Mobile</td>
+        <td>Telas 8, 9, 10, múltiplos perfis, crédito</td>
+      </tr>
+      <tr>
+        <td>Backend</td>
+        <td>Modelo de perfis, dados de cartão, simulador</td>
+      </tr>
+      <tr>
+        <td>Open Fin.</td>
+        <td>Expansão: cartão de crédito via OF</td>
+      </tr>
+      <tr>
+        <td>Dados/IA</td>
+        <td>Indicadores financeiros, comprometimento</td>
+      </tr>
+      <tr>
+        <td>QA</td>
+        <td>Testes de perfil, conciliação crédito</td>
+      </tr>
+      <tr>
+        <td>DevOps</td>
+        <td>Cache, performance</td>
+      </tr>
     </table>
 
     <h3>🟢 Versão 1.0 – Maduro</h3>
     <table>
-        <tr><th>Squad</th><th>Tarefas principais</th></tr>
-        <tr><td>Mobile</td><td>Telas 11, 12, 13, offline, acessibilidade, i18n</td></tr>
-        <tr><td>Backend</td><td>API de investimentos, relatórios, recomendações</td></tr>
-        <tr><td>Open Fin.</td><td>(escrita futura)</td></tr>
-        <tr><td>Dados/IA</td><td>Motor de recomendação, ML, personalização</td></tr>
-        <tr><td>QA</td><td>Testes de investimento, regressivo completo</td></tr>
-        <tr><td>DevOps</td><td>Infra global, CD, testes A/B</td></tr>
+      <tr>
+        <th>Squad</th>
+        <th>Tarefas principais</th>
+      </tr>
+      <tr>
+        <td>Mobile</td>
+        <td>Telas 11, 12, 13, offline, acessibilidade, i18n</td>
+      </tr>
+      <tr>
+        <td>Backend</td>
+        <td>API de investimentos, relatórios, recomendações</td>
+      </tr>
+      <tr>
+        <td>Open Fin.</td>
+        <td>(escrita futura)</td>
+      </tr>
+      <tr>
+        <td>Dados/IA</td>
+        <td>Motor de recomendação, ML, personalização</td>
+      </tr>
+      <tr>
+        <td>QA</td>
+        <td>Testes de investimento, regressivo completo</td>
+      </tr>
+      <tr>
+        <td>DevOps</td>
+        <td>Infra global, CD, testes A/B</td>
+      </tr>
     </table>
 
     <h3>✅ Resumo Entregáveis</h3>
     <table>
-        <tr><th>Item</th><th>Status</th></tr>
-        <tr><td>📄 Documento de requisitos técnicos</td><td>✅ Concluído</td></tr>
-        <tr><td>🖼️ Wireframe descritivo por versão</td><td>✅ Concluído</td></tr>
-        <tr><td>👥 Separação por squads/times</td><td>✅ Concluído</td></tr>
+      <tr>
+        <th>Item</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>📄 Documento de requisitos técnicos</td>
+        <td>✅ Concluído</td>
+      </tr>
+      <tr>
+        <td>🖼️ Wireframe descritivo por versão</td>
+        <td>✅ Concluído</td>
+      </tr>
+      <tr>
+        <td>👥 Separação por squads/times</td>
+        <td>✅ Concluído</td>
+      </tr>
     </table>
 
     <div class="footer">
-        Documento gerado em HTML para fácil visualização. 🚀📱💰
+      Documento gerado em HTML para fácil visualização. 🚀📱💰
     </div>
-</body>
+  </body>
 </html>
