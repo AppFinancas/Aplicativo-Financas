@@ -81,6 +81,25 @@ export const componentStyles = StyleSheet.create({
     color: colors.textSecondary,
     fontSize: typography.size.subtitle,
     fontWeight: typography.weight.regular,
-  }
+  },
+  transacaoItem: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  marginBottom: spacing.sm,
+  paddingVertical: 4,
+  },
+  transacaoDescricao: {
+    color: colors.textPrimary,
+    fontSize: 14,
+    flex: 1,
+  },
+  saidaText: {
+    color: colors.danger,
+    fontWeight: '500',
+  },
+  entradaText: {
+    color: colors.success,
+    fontWeight: '500',
+  },
 });
 

@@ -4,11 +4,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDashboard } from '../hooks/useDashboard';
 import { colors, componentStyles, spacing } from '../theme';
 import SimpleCategoryChart from '../components/SimpleCategoryChart';
+import { formatarMoeda, formatarData, capitalizarNome, truncarTexto } from '../utils/formatters';
 
 export default function Dashboard({ navigation }: any) {
   const [usuario, setUsuario] = useState<any>(null);
   const { saldoTotal, gastosCategoria, ultimasTransacoes, loading, error, refresh } = useDashboard();
-
   useEffect(() => {
     const loadUser = async () => {
       const userStr = await AsyncStorage.getItem('usuario');
@@ -31,16 +31,19 @@ export default function Dashboard({ navigation }: any) {
     >
       <Text style={componentStyles.title}>Dashboard</Text>
       <Text style={[componentStyles.subtitle, styles.subtitle]}>
-        {usuario ? `Olá, ${usuario.nome}!` : 'Resumo da sua vida financeira'}
+        {usuario ? `Olá, ${capitalizarNome(usuario.nome)}!` : 'Resumo da sua vida financeira'}
       </Text>
+      <Text style={[componentStyles.subtitle, styles.subtitle]}>Vamos ver o resumo das suas finanças</Text>
+
 
       <View style={componentStyles.card}>
         <Text style={styles.cardLabel}>Saldo total</Text>
-        <Text style={styles.cardValue}>{loading ? 'Carregando...' : saldoTotal}</Text>
+        <Text style={styles.cardValue}>
+          {loading ? 'Carregando...' : formatarMoeda(saldoTotal)}</Text>
       </View>
 
       <View style={[componentStyles.card, styles.sectionCard]}>
-        <Text style={styles.sectionTitle}>Gastos por categoria (gráfico básico)</Text>
+        <Text style={styles.sectionTitle}>Gastos por categoria</Text>
         {loading ? (
           <Text style={styles.mutedText}>Carregando...</Text>
         ) : error ? (
@@ -62,11 +65,15 @@ export default function Dashboard({ navigation }: any) {
           <Text style={styles.mutedText}>Sem transações.</Text>
         ) : (
           ultimasTransacoes.slice(0, 4).map((t) => (
-            <Text key={t.id} style={styles.listItem}>
-              {t.descricao ?? t.tipo_transacao ?? 'Transação'} | {t.direcao === 'saida' ? '-' : '+'}
-              {String(t.valor)}
-            </Text>
-          ))
+        <View key={t.id} style={componentStyles.transacaoItem}>
+          <Text style={componentStyles.transacaoDescricao}>
+            {formatarData(t.data_transacao)} - {truncarTexto(t.descricao || t.tipo_transacao || 'Transação', 20)}
+          </Text>
+          <Text style={t.direcao === 'saida' ? componentStyles.saidaText : componentStyles.entradaText}>
+            {t.direcao === 'saida' ? '➖' : '➕'} {formatarMoeda((t.valor))}
+          </Text>
+        </View>
+      ))
         )}
       </View>
 
