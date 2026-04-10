@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { colors, spacing } from '../theme';
 import type { GastoCategoria } from '../services/dashboard';
+import { formatarMoeda } from '../utils/formatters'; // <-- importa a função
 
 type Props = {
   data: GastoCategoria[];
@@ -28,9 +29,16 @@ export default function SimpleCategoryChart({ data, maxItems = 5 }: Props) {
           <View key={`${item.categoria}-${idx}`} style={styles.row}>
             <Text style={styles.label}>{item.categoria}</Text>
             <View style={styles.barTrack}>
-              <View style={[styles.barFill, { width: `${widthPercent}%`, backgroundColor: item.cor || colors.primary }]} />
+              <View
+                style={[
+                  styles.barFill,
+                  { width: `${widthPercent}%`, backgroundColor: item.cor || colors.primary },
+                ]}
+              />
             </View>
-            <Text style={styles.value}>{String(item.total_gasto)}</Text>
+            <Text style={styles.value}>
+              {formatarMoeda(item.total)} {/* 🔁 formatação aplicada aqui */}
+            </Text>
           </View>
         );
       })}
@@ -67,4 +75,3 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
   },
 });
-

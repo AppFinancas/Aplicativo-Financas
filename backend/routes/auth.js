@@ -89,13 +89,6 @@ router.put('/usuarios/me', auth, async (req, res) => {
   }
 
   try {
-    if (email) {
-      const emailEmUso = await pool.query('SELECT id FROM usuarios WHERE email = $1 AND id <> $2', [email, req.usuarioId]);
-      if (emailEmUso.rows.length > 0) {
-        return res.status(400).json({ erro: 'Email já está em uso por outro usuário.' });
-      }
-    }
-
     let senhaHash = null;
     if (senha) {
       const salt = await bcrypt.genSalt(10);
@@ -107,14 +100,13 @@ router.put('/usuarios/me', auth, async (req, res) => {
       UPDATE usuarios
       SET
         nome = COALESCE($1, nome),
-        email = COALESCE($2, email),
-        telefone = COALESCE($3, telefone),
-        senha_hash = COALESCE($4, senha_hash),
+        telefone = COALESCE($2, telefone),
+        senha_hash = COALESCE($3, senha_hash),
         updated_at = NOW()
-      WHERE id = $5
+      WHERE id = $4
       RETURNING id, nome, email, telefone
     `,
-      [nome || null, email || null, telefone || null, senhaHash, req.usuarioId]
+      [nome || null, telefone || null, senhaHash, req.usuarioId]
     );
 
     res.json(atualizado.rows[0]);
