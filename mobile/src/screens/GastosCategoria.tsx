@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View, RefreshControl } from 'react-native';
 import { getGastosPorCategoria, type GastoCategoria } from '../services/dashboard';
 import { colors, componentStyles, spacing } from '../theme';
+import { formatarMoeda, capitalizarNome } from '../utils/formatters'; // <-- importa formatação
 
 export default function GastosCategoria({ navigation }: any) {
   const [gastos, setGastos] = useState<GastoCategoria[]>([]);
@@ -46,8 +47,10 @@ export default function GastosCategoria({ navigation }: any) {
             <View key={`${gasto.categoria}-${idx}`} style={styles.row}>
               <View style={[styles.dot, { backgroundColor: gasto.cor || colors.primary }]} />
               <View style={styles.rowTextArea}>
-                <Text style={styles.rowTitle}>{gasto.categoria}</Text>
-                <Text style={styles.rowValue}>{String(gasto.total_gasto)}</Text>
+                <Text style={styles.rowTitle}>{capitalizarNome(gasto.categoria)}</Text>
+                <Text style={styles.rowValue}>
+                  {formatarMoeda(gasto.total_gasto)} {/* 🔁 valor formatado */}
+                </Text>
               </View>
             </View>
           ))
@@ -103,6 +106,8 @@ const styles = StyleSheet.create({
   },
   rowValue: {
     color: colors.textSecondary,
+    fontSize: 14,
+    fontWeight: '500',
   },
   mutedText: {
     color: colors.textSecondary,
@@ -111,4 +116,3 @@ const styles = StyleSheet.create({
     color: colors.danger,
   },
 });
-

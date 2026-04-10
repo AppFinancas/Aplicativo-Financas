@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View, RefreshControl } 
 import { getUltimasTransacoes, type TransacaoResumo } from '../services/dashboard';
 import { colors, componentStyles, spacing } from '../theme';
 import CategoriaAutomaticaBadge from '../components/CategoriaAutomaticaBadge';
+import { formatarMoeda, formatarData, capitalizarNome, truncarTexto } from '../utils/formatters';
 
 export default function Transacoes({ navigation }: any) {
   const [transacoes, setTransacoes] = useState<TransacaoResumo[]>([]);
@@ -44,15 +45,14 @@ export default function Transacoes({ navigation }: any) {
           <Text style={styles.mutedText}>Nenhuma transação encontrada.</Text>
         ) : (
           transacoes.map((t) => (
-            <View key={t.id} style={styles.row}>
-              <Text style={styles.rowTitle}>{t.descricao ?? t.tipo_transacao ?? 'Transação'}</Text>
-              <Text style={styles.rowMeta}>
-                {t.data_transacao} | {t.direcao === 'saida' ? '-' : '+'}
-                {String(t.valor)}
-                {t.categoria_nome ? ` | ${t.categoria_nome}` : ''}
-              </Text>
-              <CategoriaAutomaticaBadge descricao={t.descricao} categoriaAtual={t.categoria_nome} />
-            </View>
+          <View key={t.id} style={componentStyles.transacaoItem}>
+            <Text style={componentStyles.transacaoDescricao}>
+              {formatarData(t.data_transacao)} - {truncarTexto(t.descricao || t.tipo_transacao || 'Transação', 20)}
+            </Text>
+            <Text style={t.direcao === 'saida' ? componentStyles.saidaText : componentStyles.entradaText}>
+              {t.direcao === 'saida' ? '➖' : '➕'} {formatarMoeda((t.valor))}
+            </Text>
+          </View>
           ))
         )}
       </View>
